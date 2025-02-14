@@ -2,7 +2,7 @@
   "name": "event-redirects",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://studiobutter.github.io/event-redirects",
+  "homepage": "https://st-direct.pages.dev/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

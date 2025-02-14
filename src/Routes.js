@@ -27,6 +27,8 @@ import SkyBeta from './pages/event/sky-beta';
 import Yu from './pages/event/yu';
 // Testing
 
+import NotFound from './components/NotFound';
+
 function AppRoutes() {
   return (
     <Router>
@@ -53,6 +55,7 @@ function AppRoutes() {
         <Route path="/event/nap_cg" element={<CloudNAPCN />} />
         <Route path="/event/genshin_cloud" element={<CloudYSGlobal />} />
 
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
