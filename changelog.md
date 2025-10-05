@@ -1,5 +1,9 @@
 # Changelogs
 
+## v2.0.0
+
+Migrate to Vite and add support for macOS for Zenless Zone Zero - Cloud (China Client)
+
 ## v1.0.2
 
 Deprecated Sky: Children of the Light Beta Link following the official close down of the official open beta

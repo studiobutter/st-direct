@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; // eslint-disable-line no-unused-vars
+import { useEffect } from 'react'; // eslint-disable-line no-unused-vars
 
 const iOS_Url = 'https://api-takumi.mihoyo.com/event/download_porter/link/clgm_cn/official/ios_default'
 const Android_Url = 'https://api-takumi.mihoyo.com/event/download_porter/link/clgm_cn/official/android_web'
