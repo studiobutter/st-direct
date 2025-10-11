@@ -11,4 +11,4 @@ Use for certain areas like Discord Event Tab and click events
 
 App opening uses URI Schemes to achive this.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/studiobutter/st-direct)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/import?s=https://github.com/studiobutter/st-direct&branch=main)
