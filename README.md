@@ -1,7 +1,8 @@
 # Event Redirections
 
 > [!NOTE]  
-> This is a duplicate repository of [event-redirects](https://github.com/studiobutter/event-redirects) for hosting to Vercel.
+> This is a duplicate repository of [event-redirects](https://github.com/studiobutter/event-redirects) for hosting to Vercel. This repository will not have any new updates or features and is on maintenance mode.
+> The project will soon be deprecate. If you wish to clone the project, please use this on as the base or fork the new project. New project will be created soon.
 
 This repo is use to redirect user to an app (if it's already installed) or a website.
 
