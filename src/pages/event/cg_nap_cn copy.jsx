@@ -1,11 +1,11 @@
 import { useEffect } from 'react'; // eslint-disable-line no-unused-vars
 
-const Mobile_Url = "https://act-api-takumi.mihoyo.com/event/download_porter/link/clgm_nap-cn/official/android_cloudgame"
-const Url = 'https://api-takumi.mihoyo.com/event/download_porter/link/clgm_nap-cn/official/pc_ldytest2'
+const Mobile_Url = "https://sg-public-api.hoyoverse.com/event/download_porter/link/clgm_nap-global/official/android_default"
+const Url = 'https://sg-public-api.hoyoverse.com/event/download_porter/link/clgm_nap-global/official/pc_ldy'
 
 function CloudNAPCN() {
     useEffect(() => { 
-      window.location.href = 'cloudnap://';
+      window.location.href = 'cloudnapglobal://';
       }, []);
     const getDownloadUrl = () => {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -27,9 +27,9 @@ function CloudNAPCN() {
 
     return (
       <div>
-      <p>启动云·绝区零...</p>
+      <p>Opening Zenless Zone Zero - Cloud...</p>
 
-      <p>如果游戏无法打开、出现无效错误或您尝试在 PC 上打开此游戏，则可能是您没有该游戏。请<a href={getDownloadUrl()}>此处</a>下载游戏或在 PC 上打开云·绝区零</p>
+      <p>If the game fails to open, throws an invalid error or you trying to open the game on PC, please download the game <a href={getDownloadUrl()}>here</a> or Open "Zenless Zone Zero - Cloud" on PC</p>
       </div>
     );
 }
