@@ -19,9 +19,10 @@ import NAPvn from './pages/event/nap_vn';
 
 // miHoYo Cloud
 import CloudYSCN from './pages/event/cg_ys_cn';
-import CloudSRCN from './pages/event/cg_sr_cn';
 import CloudYSGlobal from './pages/event/cg_ys_global';
+import CloudSRCN from './pages/event/cg_sr_cn';
 import CloudNAPCN from './pages/event/cg_nap_cn';
+import CloudNAPGlobal from './pages/event/cg_nap_global';
 
 import NotFound from './components/NotFound';
 
@@ -49,6 +50,7 @@ function AppRoutes() {
         <Route path="/event/sr_cg" element={<CloudSRCN />} />
         <Route path="/event/nap_cg" element={<CloudNAPCN />} />
         <Route path="/event/genshin_cloud" element={<CloudYSGlobal />} />
+        <Route path="/event/nap_cloud" element={<CloudNAPGlobal />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
