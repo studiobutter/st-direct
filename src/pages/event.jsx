@@ -132,7 +132,11 @@ function EventRedirect() {
     "Opening...";
 
   if (game && game.startsWith("cg_")) {
-    if (game == "cg_sr") {return} else return (
+    if (game === "cg_sr") {
+      return null;
+    }
+
+    return (
       <div
         style={{
           textAlign: "center",
@@ -198,7 +202,6 @@ function EventRedirect() {
           <a href={downloadUrl} style={{ color: "#007bff" }}>
             here
           </a>
-          {game === "yu" && " 下载游戏"}
         </p>
       )}
     </div>
