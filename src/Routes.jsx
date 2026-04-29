@@ -3,26 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Main Page
 import Home from './pages/home';
 import Status from './pages/status';
-
-// miHoYo
-import YSglobal from './pages/event/ys_global';
-import YScn from './pages/event/ys_cn';
-import YSvn from './pages/event/ys_vn';
-
-import SRglobal from './pages/event/sr_global';
-import SRcn from './pages/event/sr_cn';
-import SRvn from './pages/event/sr_vn';
-
-import NAPglobal from './pages/event/nap_global';
-import NAPcn from './pages/event/nap_cn';
-import NAPvn from './pages/event/nap_vn';
-
-// miHoYo Cloud
-import CloudYSCN from './pages/event/cg_ys_cn';
-import CloudYSGlobal from './pages/event/cg_ys_global';
-import CloudSRCN from './pages/event/cg_sr_cn';
-import CloudNAPCN from './pages/event/cg_nap_cn';
-import CloudNAPGlobal from './pages/event/cg_nap_global';
+import EventRedirect from './pages/event';
 
 import NotFound from './components/NotFound';
 
@@ -31,27 +12,8 @@ function AppRoutes() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/event" element={<Home />} />
+        <Route path="/event" element={<EventRedirect />} />
         <Route path="/status" element={<Status />} />
-        
-        <Route path="/event/genshin" element={<YSglobal />} />
-        <Route path="/event/ysvn" element={<YSvn />} />
-        <Route path="/event/yuanshen" element={<YScn />} />
-        
-        <Route path="/event/hsr" element={<SRglobal />} />
-        <Route path="/event/sr" element={<SRcn />} />
-        <Route path="/event/hsrvn" element={<SRvn />} />
-        
-        <Route path="/event/zzz" element={<NAPglobal />} />
-        <Route path="/event/nap" element={<NAPcn />} />
-        <Route path="/event/zzzvn" element={<NAPvn />} />
-
-        <Route path="/event/ys_cg" element={<CloudYSCN />} />
-        <Route path="/event/sr_cg" element={<CloudSRCN />} />
-        <Route path="/event/nap_cg" element={<CloudNAPCN />} />
-
-        <Route path="/event/genshin_cloud" element={<CloudYSGlobal />} />
-        <Route path="/event/zzz_cloud" element={<CloudNAPGlobal />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
