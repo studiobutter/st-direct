@@ -1,6 +1,6 @@
 import AppRoutes from './Routes';
 
-import TopStripe from './pages/components/Banner'
+import TopStripe from './components/Banner'
 
 function App() {
   return (
