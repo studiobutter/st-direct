@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { isMobile, isMacOs, isAndroid, isIOS, isWindows } from "react-device-detect";
-import redirectConfig from "./components/redirectConfig";
+import redirectConfig from "../components/redirectConfig";
 
 function EventRedirect() {
   const queryParams = new URLSearchParams(window.location.search);
