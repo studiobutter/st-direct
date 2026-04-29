@@ -27,6 +27,32 @@ function EventRedirect() {
     return resolved;
   }, [game, region]);
 
+  // 1.5 Check Platform Support
+  const isSupportedPlatform = useMemo(() => {
+    const gameConfig = redirectConfig[game];
+    if (!gameConfig) return false;
+
+    // Region restriction check
+    if (gameConfig.regions && !gameConfig.regions.includes(region)) {
+      return false;
+    }
+
+    // Platform restriction check
+    if (gameConfig.platforms) {
+      const { platforms } = gameConfig;
+      let allowed = false;
+
+      if (platforms.includes("mobile") && isMobile) allowed = true;
+      if (platforms.includes("pc") && isWindows) allowed = true;
+      if (platforms.includes("macos") && isMacOs) allowed = true;
+      if (platforms.includes("web") && !isMobile) allowed = true;
+
+      return allowed;
+    }
+
+    return true; // Default true if no restrictions exist
+  }, [game, region]);
+
   // 2. Standardized Download URL Logic
   const downloadUrl = useMemo(() => {
     if (!config) return null;
@@ -41,35 +67,42 @@ function EventRedirect() {
     return source.pc || source.android || source.ios;
   }, [config]);
 
-  // 3. Redirect Effect
+  // 3. Redirect URI Logic
+  const redirectUri = useMemo(() => {
+    if (!config?.uris) return null;
+    const isUniversalBinaryMac = (game === "cg_nap" || game === "bh3") && isMacOs;
+    return isMobile || isUniversalBinaryMac
+      ? config.uris.mobile
+      : config.uris.pc || config.uris.mobile;
+  }, [config, game]);
+
+  // 4. Redirect Effect
   useEffect(() => {
-    // if (import.meta.env.DEV || !config) return;
-    if (!config?.uris) return;
+    if (!redirectUri || !isSupportedPlatform) return;
     
     const ua = navigator.userAgent;
     const isInApp =
       /FBAN|FBAV|Instagram|Twitter|TwitterAndroid|TikTok|Line/i.test(ua);
     if (isInApp && isMobile) return;
 
-
-    const redirectUri =
-      isMobile || (game === "bh3" && region === "cn" && isMacOs)
-        ? config.uris.mobile
-        : config.uris.pc || config.uris.mobile;
-
     let downloadTimer;
 
-    if (game && game.startsWith("cg_") && isWindows) {
-      if (game === "cg_sr") {
-        window.location.href = redirectUri;
-      } else {
+    // Auto-redirect disabled for certain cloud games on web/PC, mimicking original logic
+    const gameConfig = redirectConfig[game];
+    const isCloudWeb = gameConfig?.platforms?.includes("web") && !isMobile;
+    const isCloudNapPC = game === "cg_nap" && isWindows;
+    
+    if (isCloudWeb && game !== "cg_sr") {
+        // We do not auto-redirect Genshin Cloud on Web (as per original logic where it returned)
         return;
-      }
+    }
+    if (isCloudNapPC) {
+        // We do not auto-redirect ZZZ Cloud on PC (as per original logic)
+        return;
     }
 
     const attemptRedirect = () => {
       // 1. Attempt to open the App
-
       window.location.href = redirectUri;
 
       // 2. Fallback Logic: Only trigger if the page stays in focus
@@ -114,12 +147,12 @@ function EventRedirect() {
       clearTimeout(downloadTimer);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [config, downloadUrl, game, region]);
+  }, [config, downloadUrl, game, region, isSupportedPlatform]);
 
-  if (!config) {
+  if (!config || !isSupportedPlatform) {
     return (
       <div>
-        <p>Invalid game or region specified.</p>
+        <p>Invalid game, region, or unsupported platform specified.</p>
         <p>Supported: {Object.keys(redirectConfig).join(", ")}</p>
       </div>
     );
@@ -127,15 +160,18 @@ function EventRedirect() {
 
   const showUI = !isIOS && (isAndroid ? region !== "global" : true);
   const displayText =
+    config.cgui?.text ||
     config.text ||
     (isMobile ? config.mobileText : config.pcText) ||
     "Opening...";
 
-  if (game && game.startsWith("cg_")) {
-    if (game === "cg_sr") {
-      return null;
-    }
+  // For cloud games that did not auto-redirect (e.g., Genshin Cloud, ZZZ Cloud on PC)
+  const gameConfig = redirectConfig[game];
+  const isCloudWeb = gameConfig?.platforms?.includes("web") && !isMobile;
+  const isCloudNapPC = game === "cg_nap" && isWindows;
+  const showManualCloudUI = (isCloudWeb || isCloudNapPC) && game !== "cg_sr";
 
+  if (showManualCloudUI) {
     return (
       <div
         style={{
@@ -144,26 +180,29 @@ function EventRedirect() {
           fontFamily: "sans-serif",
         }}
       >
-        {!isMobile && (
-          <button
-            onClick={() =>
-              (window.location.href = config.uris.pc || config.uris.mobile)
-            }
-            style={{
-              padding: "10px 20px",
-              margin: "20px 0",
-              backgroundColor: "#007bff",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            {config.cgui.text || "Download the game"}
-          </button>
-        )}
+        <button
+          onClick={() =>
+            (window.location.href = redirectUri)
+          }
+          style={{
+            padding: "10px 20px",
+            margin: "20px 0",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          {config.cgui?.text || "Download the game"}
+        </button>
       </div>
     );
+  }
+
+  // Hide UI for cg_sr as it auto-redirects
+  if (game === "cg_sr") {
+    return null;
   }
 
   return (
@@ -180,7 +219,7 @@ function EventRedirect() {
       {!isMobile && (
         <button
           onClick={() =>
-            (window.location.href = config.uris.pc || config.uris.mobile)
+            (window.location.href = redirectUri)
           }
           style={{
             padding: "10px 20px",

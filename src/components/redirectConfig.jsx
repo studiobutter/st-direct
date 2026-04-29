@@ -10,6 +10,7 @@ const redirectConfig = {
   // GENSHIN IMPACT
   // =========================
   ys: {
+    platforms: ["pc", "mobile"],
     global: {
       uris: { mobile: "genshin://", pc: "hyp-global://launchgame?gamebiz=hk4e_global&openGame=true" },
       downloads: { android: "https://hoyo.link/euHgFDAL", ios: "https://hoyo.link/euHgFDAL", pc: HOYO_PLAY_GLOBAL },
@@ -32,6 +33,7 @@ const redirectConfig = {
   },
 
   sr: {
+    platforms: ["pc", "mobile"],
     global: {
       uris: { mobile: "honkaistarrail://", pc: "hyp-global://launchgame?gamebiz=hkrpg_global&openGame=true" },
       downloads: { android: "https://hoyo.link/dvHgFCAL", ios: "https://hoyo.link/dvHgFCAL", pc: HOYO_PLAY_GLOBAL },
@@ -54,6 +56,7 @@ const redirectConfig = {
   },
 
   zzz: {
+    platforms: ["pc", "mobile"],
     global: {
       uris: { mobile: "zenlessglobal://", pc: "hyp-global://launchgame?gamebiz=nap_global&openGame=true" },
       downloads: { android: "https://hoyo.link/0y5jFBAL", ios: "https://hoyo.link/0y5jFBAL", pc: HOYO_PLAY_GLOBAL },
@@ -79,6 +82,7 @@ const redirectConfig = {
   // HONKAI IMPACT 3RD
   // =========================
   bh3: {
+    platforms: ["pc", "macos", "mobile"], // Assumed for bh3
     // Standardized the 'overseas' servers to fit the same region pattern
     sea: {
       uris: { mobile: "bh3overseas://", pc: "hyp-global://launchgame?gamebiz=bh3_global&package=overseas_official&openGame=true" },
@@ -121,6 +125,7 @@ const redirectConfig = {
   // CLOUD GAMES (Normalized)
   // =========================
   cg_ys: {
+    platforms: ["mobile", "web"],
     cn: {
       uris: { mobile: "yscloud://", pc: "https://ys.mihoyo.com/cloud" },
       downloads: { ios:"https://api-takumi.mihoyo.com/event/download_porter/link/clgm_cn/official/ios_default", android: "https://api-takumi.mihoyo.com/event/download_porter/link/clgm_cn/official/android_web", pc: "https://ys.mihoyo.com/cloud" },
@@ -135,6 +140,8 @@ const redirectConfig = {
     }
   },
   cg_sr: {
+    platforms: ["mobile", "web"],
+    regions: ["cn"],
     cn: {
       uris: { mobile: "srcloud://", pc: "https://sr.mihoyo.com/cloud" },
       downloads: { ios:"https://act-api-takumi.mihoyo.com/event/download_porter/link/clgm_hkrpg-cn/official/android_default", android: "https://act-api-takumi.mihoyo.com/event/download_porter/link/clgm_hkrpg-cn/official/android_default", pc: "https://sr.mihoyo.com/cloud" },
@@ -143,6 +150,7 @@ const redirectConfig = {
     }
   },
   cg_nap: {
+    platforms: ["pc", "macos", "mobile"],
     cn: {
       uris: { mobile: "cloudnap://", pc: "https://ys.mihoyo.com/cloud" },
       downloads: { ios:"https://act-api-takumi.mihoyo.com/event/download_porter/link/clgm_nap-cn/official/android_cloudgame", android: "https://act-api-takumi.mihoyo.com/event/download_porter/link/clgm_nap-cn/official/android_cloudgame", pc: "https://api-takumi.mihoyo.com/event/download_porter/link/clgm_nap-cn/official/pc_ldytest2" },
