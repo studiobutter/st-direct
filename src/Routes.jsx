@@ -49,8 +49,9 @@ function AppRoutes() {
         <Route path="/event/ys_cg" element={<CloudYSCN />} />
         <Route path="/event/sr_cg" element={<CloudSRCN />} />
         <Route path="/event/nap_cg" element={<CloudNAPCN />} />
+
         <Route path="/event/genshin_cloud" element={<CloudYSGlobal />} />
-        <Route path="/event/nap_cloud" element={<CloudNAPGlobal />} />
+        <Route path="/event/zzz_cloud" element={<CloudNAPGlobal />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
